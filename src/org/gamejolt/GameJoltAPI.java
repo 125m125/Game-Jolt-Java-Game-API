@@ -368,12 +368,15 @@ public class GameJoltAPI
 			for (int i = 1; i < lines.length; i++) {
 				String key = lines[i].substring(0, lines[i].indexOf(':'));
 				String value = lines[i].substring( lines[i].indexOf(':')+2, lines[i].lastIndexOf('"'));
+				System.out.println(key+" "+value);
 				if (key.equals("score")) {
 					h = new Highscore();
 				}
-				h.addProperty(key, value);
-				if (key.equals("stored")) {
-					highscores.add(h);
+				if (h!=null){
+					h.addProperty(key, value);
+					if (key.equals("stored")) {
+						highscores.add(h);
+					}
 				}
 			}
 			return highscores;
@@ -1334,6 +1337,7 @@ public class GameJoltAPI
 		try {
 			URL url = new URL(urlString);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
 			connection.connect();
 			InputStream stream = connection.getInputStream();
 			BufferedInputStream buff = new BufferedInputStream(stream);
