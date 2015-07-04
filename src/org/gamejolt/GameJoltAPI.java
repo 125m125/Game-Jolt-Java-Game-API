@@ -684,17 +684,17 @@ public class GameJoltAPI
 					System.out.println(response); 
 				}
 				break;
-			case RESTRICTED:
-				params = new HashMap<String, String>();
-				params.put("operation", operation.toString().toLowerCase());
-				params.put("value", value);
-				params.put("key", ""+key);
-		        params.put("restriction_username", username);
-		        params.put("restriction_token", usertoken);
-				params.put("format", "dump");
-				response = request("data-store/update/", params, false);
-				if (verbose) { System.out.println(response); }
-				break;
+//			case RESTRICTED:													requires api v1_2
+//				params = new HashMap<String, String>();
+//				params.put("operation", operation.toString().toLowerCase());
+//				params.put("value", value);
+//				params.put("key", ""+key);
+//		        params.put("restriction_username", username);
+//		        params.put("restriction_token", usertoken);
+//				params.put("format", "dump");
+//				response = request("data-store/update/", params, false);
+//				if (verbose) { System.out.println(response); }
+//				break;
 			}
 		} catch(Exception e) {
 			System.err.println("urg");
@@ -733,17 +733,17 @@ public class GameJoltAPI
 			response = this.request("data-store/set", "key=" + key + "&data=" + data);
 			if (verbose) { System.out.println(response); }
 			break;
-		case RESTRICTED:
-		     if (!verified){
-		             return null;
-		     }
-		     params = new HashMap<String, String>();
-		     params.put("value", data);
-		     params.put("key", "" + key);
-		     params.put("restriction_username", username);
-		     params.put("restriction_token", usertoken);
-		     response=request("data-store/set", params,false);
-		     break;
+//		case RESTRICTED:                                            requires api v1_2
+//		     if (!verified){
+//		             return null;
+//		     }
+//		     params = new HashMap<String, String>();
+//		     params.put("value", data);
+//		     params.put("key", "" + key);
+//		     params.put("restriction_username", username);
+//		     params.put("restriction_token", usertoken);
+//		     response=request("data-store/set", params,false);
+//		     break;
 		}
 		if (response.contains("success:\"false\"")) {
 			if (verbose) { System.err.println("GameJoltAPI: Could not add " + type + " DataStore with Key \"" + key + "\"."); }
