@@ -44,6 +44,7 @@ public class QuickTester {
 	}
 	@Before
 	public void before(){
+		api.setVerbose(true);
 		if (!api.verifyUser(username, token))
 			fail("unable to verify user. Can't start testing");
 	}
@@ -134,4 +135,18 @@ public class QuickTester {
 		assertTrue(api.sessionUpdate());
 		assertTrue(api.sessionClose());
 	}
+	/*
+	 * not implemented in v1_1
+	@Test
+	public void testRestrictedDataStore(){
+		DataStore s;
+		assertNotNull(s=api.setDataStore(DataStoreType.RESTRICTED, "testkey", "testdata"));
+		assertNotNull(s=api.getDataStore(DataStoreType.RESTRICTED, "testkey"));
+		assertEquals("testdata",s.getData());
+		assertNotNull(s=api.updateDataStore(DataStoreType.RESTRICTED, "testkey", DataStoreOperation.APPEND, "lol"));
+		assertEquals("testdatalol",s.getData());
+		assertNotNull(s=api.getDataStore(DataStoreType.RESTRICTED, "testkey"));
+		assertEquals("testdatalol",s.getData());
+	}
+	*/
 }

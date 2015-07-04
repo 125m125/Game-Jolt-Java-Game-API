@@ -11,7 +11,12 @@ package org.gamejolt;
 public class DataStore 
 {
 	/** This enum is used in the GameJoltAPI class to determine which datastores to retrieve */
-	public enum DataStoreType {USER, GAME};
+	public enum DataStoreType {USER, GAME,
+		/**
+		 * the restricted mode is not yet implemented in the Gameapi v1_1
+		 */
+		RESTRICTED		
+		};
 	
 	public enum DataStoreOperation {ADD, SUBTRACT, MULTIPLY, DIVIDE, APPEND, PREPEND};
 	
