@@ -26,14 +26,14 @@ import org.junit.Test;
 
 public class QuickTester {
 	
-	private static final int gameId=1;
-	private static final String privateKey = "";
+	private static final int gameId=36082;
+	private static final String privateKey = "b77971602d7da2df77512c6ff31cb509";
 	
-	private static final int trophyId = 0;
-	private static final int highscoreId = 0;
+	private static final int trophyId = 11904;
+	private static final int highscoreId = 37561;
 	
-	private static final String username = "";
-	private static final String token = "";
+	private static final String username = "elpaysanmobmember125";
+	private static final String token = "8043fd";
 	
 	
 	static GameJoltAPI api;
@@ -121,11 +121,26 @@ public class QuickTester {
 	@Test
 	public void testDataStore(){
 		DataStore s;
-		assertNotNull(s=api.setDataStore(DataStoreType.GAME, "testkey", "testdata"));
-		assertNotNull(s=api.getDataStore(DataStoreType.GAME, "testkey"));
+		assertNotNull(s=api.setDataStore(DataStoreType.USER, "testkey", "testdata"));
+		assertNotNull(s=api.getDataStore(DataStoreType.USER, "testkey"));
 		assertEquals("testdata",s.getData());
-		assertNotNull(s=api.updateDataStore(DataStoreType.GAME, "testkey", DataStoreOperation.APPEND, "lol"));
+		assertNotNull(s=api.updateDataStore(DataStoreType.USER, "testkey", DataStoreOperation.APPEND, "lol"));
 		assertEquals("testdatalol",s.getData());
+	}
+	@Test
+	public void testLargeSubmission(){
+		api.setVerbose(true);
+		api.removeDataStore(DataStoreType.GAME, "giantkey");
+		StringBuilder sb = new StringBuilder(9000);
+		for (int i=0; i<10; i++){
+			sb.append("GiantData"+i);
+		}
+		DataStore s;
+		assertNotNull(s=api.setDataStore(DataStoreType.GAME, "giantkey", sb.toString()));
+		assertNotNull(s=api.getDataStore(DataStoreType.GAME, "giantkey"));
+		System.out.println(sb.substring(0,s.getData().length()));
+		System.out.println(s.getData());
+		assertEquals(sb.toString(),s.getData());
 	}
 	@Test
 	public void testSession(){

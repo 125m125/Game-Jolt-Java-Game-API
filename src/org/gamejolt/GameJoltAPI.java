@@ -368,7 +368,6 @@ public class GameJoltAPI
 			for (int i = 1; i < lines.length; i++) {
 				String key = lines[i].substring(0, lines[i].indexOf(':'));
 				String value = lines[i].substring( lines[i].indexOf(':')+2, lines[i].lastIndexOf('"'));
-				System.out.println(key+" "+value);
 				if (key.equals("score")) {
 					h = new Highscore();
 				}
@@ -1301,15 +1300,14 @@ public class GameJoltAPI
 			
 			if (!requireVerified) {
 				String user_token = params.get("user_token");
-				params.put("user_token", params.get("user_token") + privateKey);
+				params.put("user_token", params.get("user_token"));
 				String urlString = this.getRequestURL(method, params);
 				String signature = this.MD5(urlString);
 				
 				params.put("user_token", user_token);
 				params.put("signature", signature);
 			} else {
-				// String user_token = params.get("user_token");
-				params.put("user_token", this.usertoken + privateKey);
+				params.put("user_token", this.usertoken);
 				params.put("username", this.username);
 				String urlString = this.getRequestURL(method, params);
 				String signature = this.MD5(urlString);
@@ -1348,7 +1346,6 @@ public class GameJoltAPI
 			}
 			return response;
 		} catch (IOException e) {
-			//e.printStackTrace();
 			if (this.verbose) { System.err.println("GameJoltAPI: " + e.getMessage()); }
 			return "REQUEST_FAILED";
 		}
