@@ -1,4 +1,4 @@
-.DS_Store
-bin/
-.gradle/
-build/
+target
+.project
+.classpath
+.settings/
